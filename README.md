@@ -16,13 +16,6 @@ More on the functionality can be found in claims.txt
     <th>Description</th>
   </tr>
   <tr>
-    <td>data</td>
-    <td></td>
-    <td>value</td>
-    <td></td>
-    <td>Reserve a memory location, initialized to the value specified</td>
-  </tr>
-  <tr>
     <td>ldc</td>
     <td>0</td>
     <td>value</td>
@@ -157,9 +150,16 @@ More on the functionality can be found in claims.txt
   </tr>
   <tr>
     <td>SET</td>
-    <td>19</td>
+    <td>20</td>
     <td>value</td>
     <td></td>
     <td>Set the label on this line to the specified value (rather than the PC). This is an optional extension, for which additional marks are available. </td>
+  </tr>
+    <tr>
+    <td>data</td>
+    <td>19</td>
+    <td>value</td>
+    <td></td>
+    <td>Reserve a memory location, initialized to the value specified</td>
   </tr>
 </table>
