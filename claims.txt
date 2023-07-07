@@ -1,0 +1,173 @@
+/*****************************************************************************
+TITLE: Claims																																
+AUTHOR:   M Shanmukha Priya (2101CS40)
+Declaration of Authorship
+This txt file, claims.txt, is part of the miniproject of CS209/CS210 at the 
+department of Computer Science and Engg, IIT Patna . 
+*****************************************************************************/
+
+Files:
+==========
+*All the files i submitted, asm.cpp and emu.cpp and claims.txt, have my name and student id at the start, along with a declaration of authorship.
+
+The evidence for Assembler including the output files from the 5  test examples has also been uploaded. They are test1(3 output files), test2(3 output files), test3
+(3 output files), memcpy(3 output files), Bubble_sort(3 output files) and swap_two_numbers (3 output files) . All the test files have been tested and work properly. 
+
+As for the evidence for the emulator is uploaded
+with 5 output files, test1.trace and swap_two_numbers.trace.
+
+*Both of my c programs did not show any errors and warnings when i compiled it with
+gcc -std=c89 -pedantic and gcc -std=c89 -pedantic -W -Wall -Wpointer-arith -Wwrite-strings -Wstrict-prototypes standard  or equilvalent ....or gcc ... or g++
+
+*Two programs are compilable with gcc asm.c -o asm and gcc emu.c -o emu.
+
+
+=============================
+Program format and structure:
+=============================
+1. The assembler:
+
+    * with three data structures to store respectively labels, mnemonic opcodes and mnemonic type. with expected operands.
+	
+	-have created a separate map for classifying the instructions based on their type: 
+	branch instructions - code 2
+	instructions that demand a value/offset : code 1
+	instructions that do not require a value/offset : code 3
+	This was helpful in determining the number and type of arguments an instruction should have in Pass 2.
+    *Also created a separate Data structure to store the formatted code without comments and blank lines.
+
+    * uses a single routine for both passes.
+    * detects label errors. 
+	-Checks if label is valid
+	-Gives warning for unused labels
+	-Checks for duplicate labels
+    * consistent and sensible formatting with sensible program structure. 
+    * sensible variable, function & type names with explanatory comments.
+		* advanced listing file.
+		* assembles test programs.
+    * can implements and demonstrates the instruction SET.
+    * Have assumed opcodes 19 for data and 20 for SET.
+	This was done to accomodate the values that are in the range of opcodes as possible data/ variable values and to remove ambiguity.
+
+
+2. The emulator:
+
+    * with two data structures to store respectively memory, Instructions converted from binary.
+    * loads object file, 
+    * by giving the instructions "-before/-after" , the program can produce memory dump before/after execution.
+    * by giving the instruction "-trace", the program prints the result of program executed.
+    * by giving the instruction "-all", the program prints the memory dump before and after along with the trace.
+    * detects errant programs and segmentation faults.
+
+
+=============================
+Testing:
+=============================
+
+1. The assembler:
+
+I have tested  five / five examples shown as bellow. The errors only occurred in the file test2.asm and 
+the program immediately stopped on the second pass. 
+
+The others were tested without any errors detected and produced three output files, listing file, 
+error log file and machine readable object file, for each example. 
+
+
+
+1)
+#Input: ./asm test1.asm
+#Output: 
+a. test1.L
+b. test1.log (without any error messages)
+c. test1.o
+
+2)
+#Input:./asm test2.asm
+#Output: 
+a. test2.L
+b. test2.log (without error messages shown as below but also in log file)
+c. test2.o
+
+WARNING- unused label: label
+WARNING- unused label: label
+WARNING- unused label: 0def
+ERROR- Undefined label nonesuch at line 5
+ERROR- Undefined label 08ge at line 6
+ERROR- Missing operand at line 7
+ERROR- Too many arguments for the given instruction at line 8
+ERROR- Undefined label 5, 6 at line 9
+WARNING- Incorrect label format0def at line 10
+ERROR- Invalid instruction at line 11
+ERROR- Invalid instruction at line 12
+
+3)
+#Input:./asm test3.asm
+#Output: 
+a. test3.L 
+b. test3.log (without any error messages)
+c. test3.o
+
+
+4)
+#Input:./asm memcpy.asm
+#Output: 
+a. memcpy.L 
+b. memcpy.log (without any error messages)
+c. memcpy.o
+
+5)
+#Input:./asm Bubble_sort.asm
+#Output: 
+a. Bubble_sort.L 
+b. Bubble_sort.log (without any error messages)
+c. Bubble_sort.o
+
+6)
+#Input:./asm swap_two_numbers.asm
+#Output: 
+a. swap_two_numbers.L 
+b. swap_two_numbers.log (without any error messages)
+c. swap_two_numbers.o
+
+
+
+2. The emulator:
+
+I have tested five examples shown as bellow. The errors only occurred in the file test1.o and 
+the program immediately stopped with an error message on the screen. 
+
+The others were tested without any errors detected and produced excution data both on the screen and 
+output text file for each example according to the usage instruction. 
+
+After running the bin file given, the trace data are the same as 
+the implemented result from my own program.
+
+1)
+#Input:./emu -after memcpy.o
+#Output: memcpy.trace
+
+
+2)
+#Input: ./emu -after test3.o
+#Output: test3.trace
+
+
+3)
+#Input: ./emu -after Bubble_sort.o
+#Output: Bubble_sort.trace
+
+Sorts all the given numbers in ascending order.
+
+4)
+#Input:./emu -trace test1.o
+#Output: test1.trace
+
+This program contains an infinite loop. Stdout displays that there is an infinite loop and the program terminates.
+The emulator ran only 3 instructions whose trace is dumped into the test1.trace file.
+
+5)
+#Input:./emu -all swap_two_numbers.o
+#Output: swap_two_numbers.trace
+
+This program swaps two numbers and the memory before and after dump is shown in the trace file.
+
